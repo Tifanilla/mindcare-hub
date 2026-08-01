@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindCare Hub - Mental Health & Well-being</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,10 +15,10 @@
             <div class="logo">MindCare 🌿</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Learn</a></li>
-                <li><a href="#tools">Interactive Tools</a></li>
-                <li><a href="#support">Support Hub</a></li>
+                <li><a href="#definition">Definition</a></li>
+                <li><a href="#causes-effects">Causes & Effects</a></li>
+                <li><a href="#prevention">Prevention</a></li>
+                <li><a href="#solutions">Solutions & Tools</a></li>
             </ul>
         </nav>
     </header>
@@ -29,48 +28,80 @@
         <div class="hero-content">
             <h1>Your Mental Health Journey Matters</h1>
             <p>Explore resources, understand causes and effects, and discover practical solutions for a healthier mind.</p>
-            <a href="#education" class="btn-primary">Start Learning</a>
+            <a href="#definition" class="btn-primary">Start Exploring</a>
         </div>
     </section>
 
-    <!-- Educational Core Section -->
-    <section id="education" class="container">
-        <h2>Core Insights</h2>
+    <!-- 1. Definition Section -->
+    <section id="definition" class="container">
+        <h2>What is Mental Health?</h2>
+        <div class="content-box">
+            <p>Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act. It also helps determine how we handle stress, relate to others, and make healthy choices. Mental health is important at every stage of life, from childhood and adolescence through adulthood.</p>
+        </div>
+    </section>
+
+    <!-- 2 & 3. Causes and Effects Section -->
+    <section id="causes-effects" class="alt-background">
+        <div class="container">
+            <h2>Causes & Effects</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>🔍 Common Causes</h3>
+                    <ul>
+                        <li><strong>Biological factors:</strong> Genes or brain chemistry.</li>
+                        <li><strong>Life experiences:</strong> Trauma, abuse, or chronic stress.</li>
+                        <li><strong>Family history:</strong> Having a history of mental health conditions.</li>
+                        <li><strong>Environmental factors:</strong> Isolation, financial strain, or heavy pressure.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>⚡ Potential Effects</h3>
+                    <ul>
+                        <li>Impact on physical health (fatigue, headaches, sleep issues).</li>
+                        <li>Difficulty in maintaining personal or professional relationships.</li>
+                        <li>Reduced productivity and focus at work or school.</li>
+                        <li>Overwhelming feelings of anxiety, sadness, or burnout.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Prevention Section -->
+    <section id="prevention" class="container">
+        <h2>Preventions & Healthy Habits</h2>
         <div class="grid-container">
             <div class="card">
-                <h3>📖 Definition</h3>
-                <p>Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act.</p>
+                <h3>🧘 Mindfulness & Stress Management</h3>
+                <p>Practicing deep breathing, meditation, or yoga to keep your nervous system grounded.</p>
             </div>
             <div class="card">
-                <h3>🔍 Causes</h3>
-                <p>Rooted in a mix of biological factors (genes/brain chemistry), life experiences (trauma/abuse), and family history.</p>
+                <h3>💤 Quality Sleep Hygiene</h3>
+                <p>Aiming for 7-9 hours of consistent sleep nightly to allow the brain to recover and repair.</p>
             </div>
             <div class="card">
-                <h3>⚡ Effects</h3>
-                <p>Can impact physical health, decision-making, relationships, and everyday productivity if left unaddressed.</p>
-            </div>
-            <div class="card">
-                <h3>🛡️ Prevention</h3>
-                <p>Practicing mindfulness, staying connected, getting adequate rest, and setting healthy boundaries.</p>
+                <h3>🤝 Strong Social Support</h3>
+                <p>Maintaining open communication with friends, family, or trusted community groups.</p>
             </div>
         </div>
     </section>
 
-    <!-- Solutions & Interactive Section -->
-    <section id="tools" class="tools-section">
+    <!-- 5. Solutions & Interactive Tools Section -->
+    <section id="solutions" class="alt-background">
         <div class="container">
-            <h2>Solutions & Tools</h2>
+            <h2>Solutions & Interactive Tools</h2>
             <div class="grid-container">
                 <div class="card interactive-card">
                     <h3>😊 Daily Mood Tracker</h3>
-                    <p>Log how you feel today and see your wellness trend.</p>
+                    <p>Log how you feel today and see an uplifting thought.</p>
                     <button id="log-mood-btn" class="btn-secondary">Log Mood</button>
                     <p id="mood-output" class="output-text"></p>
                 </div>
-                <div class="card">
-                    <h3>🧘 Relaxation Hub</h3>
-                    <p>Take a 2-minute guided breathing break to calm your mind.</p>
-                    <a href="#" class="btn-secondary">Start Breathing</a>
+                <div class="card interactive-card">
+                    <h3>📝 Quick Self-Check</h3>
+                    <p>Answer a quick question to gauge your current stress level.</p>
+                    <button id="quiz-btn" class="btn-secondary">Take Check-in</button>
+                    <p id="quiz-output" class="output-text"></p>
                 </div>
             </div>
         </div>
