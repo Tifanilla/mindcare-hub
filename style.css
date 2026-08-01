@@ -167,6 +167,126 @@ h2 {
     color: #2b6cb0;
 }
 
+/* Community Wall Styling */
+.section-subtitle {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 2.5rem;
+    margin-top: -1.5rem;
+}
+
+.community-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .community-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2d3748;
+}
+
+.form-group select, 
+.form-group textarea, 
+.reply-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+.form-group textarea:focus, 
+.reply-input:focus {
+    outline: none;
+    border-color: #3182ce;
+}
+
+.wall-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.wall-container h3 {
+    margin-bottom: 1.5rem;
+    color: #1a365d;
+}
+
+.community-post {
+    background: #f7f9fc;
+    border: 1px solid #e2e8f0;
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    background: #ebf8ff;
+    color: #2b6cb0;
+}
+
+.post-text {
+    font-size: 0.95rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.responses-section {
+    background: #ffffff;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    border-left: 3px solid #3182ce;
+}
+
+.response-item {
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+}
+
+.reply-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.reply-input {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.reply-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin-top: 0 !important;
+}
+
 /* Footer */
 footer {
     text-align: center;

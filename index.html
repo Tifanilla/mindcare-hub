@@ -19,6 +19,7 @@
                 <li><a href="#causes-effects">Causes & Effects</a></li>
                 <li><a href="#prevention">Prevention</a></li>
                 <li><a href="#solutions">Solutions & Tools</a></li>
+                <li><a href="#community-wall">Community Wall</a></li>
             </ul>
         </nav>
     </header>
@@ -102,6 +103,53 @@
                     <p>Answer a quick question to gauge your current stress level.</p>
                     <button id="quiz-btn" class="btn-secondary">Take Check-in</button>
                     <p id="quiz-output" class="output-text"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Anonymous Community Support Wall -->
+    <section id="community-wall" class="container">
+        <h2>Anonymous Peer Support Wall</h2>
+        <p class="section-subtitle">Share what you are going through anonymously, or read and share advice for others.</p>
+        
+        <div class="community-wrapper">
+            <!-- Form to Post a Problem -->
+            <div class="card post-form-card">
+                <h3>Share Anonymously</h3>
+                <form id="problem-form">
+                    <div class="form-group">
+                        <label for="category-select">Category:</label>
+                        <select id="category-select" required>
+                            <option value="Academic">Academic</option>
+                            <option value="Domestic">Domestic / Family</option>
+                            <option value="General">General Well-being</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="problem-input">What's on your mind?</label>
+                        <textarea id="problem-input" rows="4" placeholder="Type your problem anonymously here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Post Anonymously</button>
+                </form>
+            </div>
+
+            <!-- Wall displaying posts and responses -->
+            <div class="wall-container">
+                <h3>Community Board</h3>
+                <div id="posts-container">
+                    <!-- Default sample post -->
+                    <div class="community-post">
+                        <span class="badge academic">Academic</span>
+                        <p class="post-text">"I've been feeling totally overwhelmed by upcoming exams and maintaining my grades. How do others cope with this pressure?"</p>
+                        <div class="responses-section">
+                            <div class="response-item">💡 <strong>Idea:</strong> Try breaking your study sessions into 25-minute blocks and don't skip sleep before exam day!</div>
+                        </div>
+                        <div class="reply-box">
+                            <input type="text" placeholder="Share your idea..." class="reply-input">
+                            <button class="btn-secondary reply-btn">Send Idea</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
