@@ -1,4 +1,15 @@
-// Mood Tracker Feature
+// Dark Mode Toggle Logic
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+darkModeToggle.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    if (document.body.classList.contains('dark-mode')) {
+        darkModeToggle.textContent = "☀️ Light Mode";
+    } else {
+        darkModeToggle.textContent = "🌙 Dark Mode";
+    }
+});
+
+// Mood Tracker & Journal Log Feature
 document.getElementById('log-mood-btn').addEventListener('click', function() {
     const moods = [
         "😊 Feeling optimistic and balanced today!", 
@@ -8,6 +19,19 @@ document.getElementById('log-mood-btn').addEventListener('click', function() {
     ];
     const randomMood = moods[Math.floor(Math.random() * moods.length)];
     document.getElementById('mood-output').textContent = randomMood;
+
+    const journalText = document.getElementById('journal-input').value.trim();
+    const historyList = document.getElementById('mood-history-list');
+    
+    const listItem = document.createElement('li');
+    if (journalText) {
+        listItem.textContent = `${randomMood} - "${journalText}"`;
+    } else {
+        listItem.textContent = `${randomMood}`;
+    }
+    
+    historyList.appendChild(listItem);
+    document.getElementById('journal-input').value = '';
 });
 
 // Mini Self-Check Feature
@@ -38,6 +62,9 @@ document.getElementById('problem-form').addEventListener('submit', function(e) {
     postDiv.innerHTML = `
         <span class="badge">${category}</span>
         <p class="post-text">"${escapeHtml(problemText)}"</p>
+        <div class="post-actions" style="margin-bottom: 10px;">
+            <button class="btn-hug">❤️ Send Virtual Hug (<span class="hug-count">0</span>)</button>
+        </div>
         <div class="responses-section">
             <div class="response-item">🌱 <em>Be the first to share an idea or words of encouragement!</em></div>
         </div>
@@ -47,8 +74,8 @@ document.getElementById('problem-form').addEventListener('submit', function(e) {
         </div>
     `;
 
-    // Add event listener to the new reply button inside this post
-    attachReplyEvent(postDiv);
+    // Attach event listeners for replies and hug counter
+    attachPostEvents(postDiv);
 
     // Prepend new post to the top of the wall container
     const container = document.getElementById('posts-container');
@@ -58,8 +85,9 @@ document.getElementById('problem-form').addEventListener('submit', function(e) {
     document.getElementById('problem-input').value = '';
 });
 
-// Function to handle replying to posts
-function attachReplyEvent(postElement) {
+// Function to handle post features (Replies & Hugs)
+function attachPostEvents(postElement) {
+    // Reply logic
     const btn = postElement.querySelector('.reply-btn');
     const input = postElement.querySelector('.reply-input');
     const responsesSection = postElement.querySelector('.responses-section');
@@ -68,7 +96,6 @@ function attachReplyEvent(postElement) {
         const replyText = input.value.trim();
         if(!replyText) return;
 
-        // Remove placeholder text if it's the first response
         if(responsesSection.innerHTML.includes('Be the first')) {
             responsesSection.innerHTML = '';
         }
@@ -80,10 +107,20 @@ function attachReplyEvent(postElement) {
 
         input.value = '';
     });
+
+    // Virtual Hug counter logic
+    const hugBtn = postElement.querySelector('.btn-hug');
+    const hugCountSpan = postElement.querySelector('.hug-count');
+    hugBtn.addEventListener('click', function() {
+        let count = parseInt(hugCountSpan.textContent);
+        hugCountSpan.textContent = count + 1;
+        hugBtn.style.transform = 'scale(1.1)';
+        setTimeout(() => { hugBtn.style.transform = 'scale(1)'; }, 200);
+    });
 }
 
 // Attach event to the initial sample post
-attachReplyEvent(document.querySelector('.community-post'));
+attachPostEvents(document.querySelector('.community-post'));
 
 // Security helper to prevent HTML injection
 function escapeHtml(text) {

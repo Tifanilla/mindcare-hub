@@ -20,6 +20,7 @@
                 <li><a href="#prevention">Prevention</a></li>
                 <li><a href="#solutions">Solutions & Tools</a></li>
                 <li><a href="#community-wall">Community Wall</a></li>
+                <li><button id="dark-mode-toggle" class="btn-theme">🌙 Dark Mode</button></li>
             </ul>
         </nav>
     </header>
@@ -92,12 +93,19 @@
         <div class="container">
             <h2>Solutions & Interactive Tools</h2>
             <div class="grid-container">
+                <!-- Daily Mood Tracker & Journal -->
                 <div class="card interactive-card">
-                    <h3>😊 Daily Mood Tracker</h3>
-                    <p>Log how you feel today and see an uplifting thought.</p>
-                    <button id="log-mood-btn" class="btn-secondary">Log Mood</button>
+                    <h3>😊 Daily Mood & Journal</h3>
+                    <p>Log how you feel and write a quick note about your day.</p>
+                    <textarea id="journal-input" rows="2" placeholder="Write a short reflection (optional)..." style="width:100%; margin-top:10px; padding:8px; border-radius:6px; border:1px solid #cbd5e0;"></textarea>
+                    <button id="log-mood-btn" class="btn-secondary">Log Mood & Save Note</button>
                     <p id="mood-output" class="output-text"></p>
+                    <div id="mood-history-container" style="margin-top: 15px; text-align: left;">
+                        <h4 style="font-size: 0.9rem; color: #4a5568; margin-bottom: 5px;">Today's Log History:</h4>
+                        <ul id="mood-history-list" style="padding-left: 1.2rem; font-size: 0.85rem; color: #4a5568;"></ul>
+                    </div>
                 </div>
+
                 <div class="card interactive-card">
                     <h3>📝 Quick Self-Check</h3>
                     <p>Answer a quick question to gauge your current stress level.</p>
@@ -142,6 +150,9 @@
                     <div class="community-post">
                         <span class="badge academic">Academic</span>
                         <p class="post-text">"I've been feeling totally overwhelmed by upcoming exams and maintaining my grades. How do others cope with this pressure?"</p>
+                        <div class="post-actions" style="margin-bottom: 10px;">
+                            <button class="btn-hug">❤️ Send Virtual Hug (<span class="hug-count">3</span>)</button>
+                        </div>
                         <div class="responses-section">
                             <div class="response-item">💡 <strong>Idea:</strong> Try breaking your study sessions into 25-minute blocks and don't skip sleep before exam day!</div>
                         </div>

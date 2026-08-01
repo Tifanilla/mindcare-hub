@@ -10,6 +10,7 @@ body {
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* Navbar */
@@ -23,6 +24,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background 0.3s;
 }
 
 .logo {
@@ -35,6 +37,7 @@ body {
     list-style: none;
     display: flex;
     gap: 1.5rem;
+    align-items: center;
 }
 
 .nav-links a {
@@ -46,6 +49,21 @@ body {
 
 .nav-links a:hover {
     color: #2b6cb0;
+}
+
+.btn-theme {
+    background: transparent;
+    border: 1px solid #cbd5e0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #4a5568;
+    transition: all 0.3s;
+}
+
+.btn-theme:hover {
+    background: #edf2f7;
 }
 
 /* Hero Section */
@@ -77,6 +95,7 @@ body {
 
 .alt-background {
     background-color: #edf2f7;
+    transition: background 0.3s;
 }
 
 h2 {
@@ -96,6 +115,7 @@ h2 {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    transition: background 0.3s, color 0.3s;
 }
 
 .grid-container {
@@ -109,7 +129,7 @@ h2 {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-    transition: transform 0.3s;
+    transition: transform 0.3s, background 0.3s, color 0.3s;
 }
 
 .card:hover {
@@ -131,7 +151,7 @@ h2 {
 }
 
 /* Buttons */
-.btn-primary, .btn-secondary {
+.btn-primary, .btn-secondary, .btn-hug {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     border-radius: 6px;
@@ -159,6 +179,19 @@ h2 {
 
 .btn-secondary:hover {
     background-color: #cbd5e0;
+}
+
+.btn-hug {
+    background-color: #fff5f5;
+    color: #e53e3e;
+    border: 1px solid #fed7d7;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.btn-hug:hover {
+    background-color: #fed7d7;
 }
 
 .output-text {
@@ -209,6 +242,8 @@ h2 {
     border-radius: 6px;
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
+    background: #fff;
+    color: #333;
 }
 
 .form-group textarea:focus, 
@@ -224,6 +259,7 @@ h2 {
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     max-height: 600px;
     overflow-y: auto;
+    transition: background 0.3s;
 }
 
 .wall-container h3 {
@@ -237,6 +273,7 @@ h2 {
     padding: 1.2rem;
     border-radius: 8px;
     margin-bottom: 1.2rem;
+    transition: background 0.3s, border-color 0.3s;
 }
 
 .badge {
@@ -254,7 +291,7 @@ h2 {
 .post-text {
     font-size: 0.95rem;
     color: #2d3748;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .responses-section {
@@ -264,6 +301,7 @@ h2 {
     margin-bottom: 0.75rem;
     font-size: 0.9rem;
     border-left: 3px solid #3182ce;
+    transition: background 0.3s;
 }
 
 .response-item {
@@ -285,6 +323,74 @@ h2 {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
     margin-top: 0 !important;
+}
+
+/* Dark Mode Theme Styles */
+body.dark-mode {
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+
+body.dark-mode .navbar, 
+body.dark-mode .card, 
+body.dark-mode .wall-container, 
+body.dark-mode .content-box {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode .logo, 
+body.dark-mode .hero-content h1,
+body.dark-mode .wall-container h3 {
+    color: #edf2f7;
+}
+
+body.dark-mode .nav-links a,
+body.dark-mode .hero-content p,
+body.dark-mode .section-subtitle,
+body.dark-mode .form-group label,
+body.dark-mode .response-item,
+body.dark-mode .post-text {
+    color: #cbd5e0;
+}
+
+body.dark-mode .alt-background {
+    background-color: #171923;
+}
+
+body.dark-mode .community-post {
+    background-color: #1a202c;
+    border-color: #4a5568;
+}
+
+body.dark-mode .responses-section {
+    background-color: #2d3748;
+    border-left-color: #63b3ed;
+}
+
+body.dark-mode .form-group select, 
+body.dark-mode .form-group textarea, 
+body.dark-mode .reply-input,
+body.dark-mode #journal-input {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    border-color: #4a5568;
+}
+
+body.dark-mode .btn-theme {
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: #4a5568;
+    color: #fff;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background-color: #718096;
 }
 
 /* Footer */
