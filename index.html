@@ -6,6 +6,10 @@
     <title>MindCare Hub - Mental Health & Well-being</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK Scripts for Backend Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
@@ -29,7 +33,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Your Mental Health Journey Matters</h1>
-            <p>Explore resources, understand causes and effects, and discover practical solutions for a healthier mind.</p>
+            <p>Explore resources, understand causes and effects, and discover practical solutions tailored for everyone.</p>
             <a href="#definition" class="btn-primary">Start Exploring</a>
         </div>
     </section>
@@ -38,7 +42,7 @@
     <section id="definition" class="container">
         <h2>What is Mental Health?</h2>
         <div class="content-box">
-            <p>Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act. It also helps determine how we handle stress, relate to others, and make healthy choices. Mental health is important at every stage of life, from childhood and adolescence through adulthood.</p>
+            <p>Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act. It also helps determine how we handle stress, relate to others, and make healthy choices across all stages of life.</p>
         </div>
     </section>
 
@@ -93,7 +97,6 @@
         <div class="container">
             <h2>Solutions & Interactive Tools</h2>
             <div class="grid-container">
-                <!-- Daily Mood Tracker & Journal -->
                 <div class="card interactive-card">
                     <h3>😊 Daily Mood & Journal</h3>
                     <p>Log how you feel and write a quick note about your day.</p>
@@ -116,10 +119,10 @@
         </div>
     </section>
 
-    <!-- 6. Anonymous Community Support Wall -->
+    <!-- 6. Anonymous Community Support Wall with Group Categories & Backend -->
     <section id="community-wall" class="container">
         <h2>Anonymous Peer Support Wall</h2>
-        <p class="section-subtitle">Share what you are going through anonymously, or read and share advice for others.</p>
+        <p class="section-subtitle">State your problems anonymously, get ideas, and share solutions organized by group categories.</p>
         
         <div class="community-wrapper">
             <!-- Form to Post a Problem -->
@@ -127,39 +130,33 @@
                 <h3>Share Anonymously</h3>
                 <form id="problem-form">
                     <div class="form-group">
-                        <label for="category-select">Category:</label>
+                        <label for="category-select">Select Category / Group:</label>
                         <select id="category-select" required>
-                            <option value="Academic">Academic</option>
-                            <option value="Domestic">Domestic / Family</option>
-                            <option value="General">General Well-being</option>
+                            <option value="Students (SHS and university)">Students (SHS and university)</option>
+                            <option value="Working professionals">Working professionals</option>
+                            <option value="Parents and caregivers">Parents and caregivers</option>
+                            <option value="Healthcare workers">Healthcare workers</option>
+                            <option value="Job seekers">Job seekers</option>
+                            <option value="Older adults">Older adults</option>
+                            <option value="People in underserved or rural communities">People in underserved or rural communities</option>
+                            <option value="Anyone interested in maintaining good mental health">Anyone interested in maintaining good mental health</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="problem-input">What's on your mind?</label>
                         <textarea id="problem-input" rows="4" placeholder="Type your problem anonymously here..." required></textarea>
                     </div>
-                    <button type="submit" class="btn-primary">Post Anonymously</button>
+                    <button type="submit" class="btn-primary">Post to Backend Database</button>
                 </form>
             </div>
 
-            <!-- Wall displaying posts and responses -->
+            <!-- Wall displaying posts and responses from Backend -->
             <div class="wall-container">
-                <h3>Community Board</h3>
+                <h3>Community Board (Live Backend)</h3>
                 <div id="posts-container">
-                    <!-- Default sample post -->
                     <div class="community-post">
-                        <span class="badge academic">Academic</span>
-                        <p class="post-text">"I've been feeling totally overwhelmed by upcoming exams and maintaining my grades. How do others cope with this pressure?"</p>
-                        <div class="post-actions" style="margin-bottom: 10px;">
-                            <button class="btn-hug">❤️ Send Virtual Hug (<span class="hug-count">3</span>)</button>
-                        </div>
-                        <div class="responses-section">
-                            <div class="response-item">💡 <strong>Idea:</strong> Try breaking your study sessions into 25-minute blocks and don't skip sleep before exam day!</div>
-                        </div>
-                        <div class="reply-box">
-                            <input type="text" placeholder="Share your idea..." class="reply-input">
-                            <button class="btn-secondary reply-btn">Send Idea</button>
-                        </div>
+                        <span class="badge">Students (SHS and university)</span>
+                        <p class="post-text">"Loading live community posts from database..."</p>
                     </div>
                 </div>
             </div>
