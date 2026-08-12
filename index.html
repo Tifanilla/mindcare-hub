@@ -1,161 +1,117 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MindCare Hub - Mental Health & Well-being</title>
+    <title>MindCare Hub | Inclusive Mental Wellness</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDK Scripts for Backend Database -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
     <header>
         <nav class="navbar">
             <div class="logo">MindCare 🌿</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#definition">Definition</a></li>
-                <li><a href="#causes-effects">Causes & Effects</a></li>
-                <li><a href="#prevention">Prevention</a></li>
-                <li><a href="#solutions">Solutions & Tools</a></li>
-                <li><a href="#community-wall">Community Wall</a></li>
+                <li><a href="#solutions">Tools</a></li>
+                <li><a href="#sos-section">SOS Relief</a></li>
+                <li><a href="#community-wall">Community</a></li>
+                <li><a href="#faq-section">FAQ</a></li>
                 <li><button id="dark-mode-toggle" class="btn-theme">🌙 Dark Mode</button></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Your Mental Health Journey Matters</h1>
-            <p>Explore resources, understand causes and effects, and discover practical solutions tailored for everyone.</p>
-            <a href="#definition" class="btn-primary">Start Exploring</a>
+            <h1>Mental Wellness for Everyone</h1>
+            <p>A supportive, inclusive space for growth, grounding, and community peer support.</p>
+            <a href="#solutions" class="btn-primary">Explore Interactive Tools</a>
         </div>
     </section>
 
-    <!-- 1. Definition Section -->
-    <section id="definition" class="container">
-        <h2>What is Mental Health?</h2>
-        <div class="content-box">
-            <p>Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act. It also helps determine how we handle stress, relate to others, and make healthy choices across all stages of life.</p>
-        </div>
-    </section>
-
-    <!-- 2 & 3. Causes and Effects Section -->
-    <section id="causes-effects" class="alt-background">
-        <div class="container">
-            <h2>Causes & Effects</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <h3>🔍 Common Causes</h3>
-                    <ul>
-                        <li><strong>Biological factors:</strong> Genes or brain chemistry.</li>
-                        <li><strong>Life experiences:</strong> Trauma, abuse, or chronic stress.</li>
-                        <li><strong>Family history:</strong> Having a history of mental health conditions.</li>
-                        <li><strong>Environmental factors:</strong> Isolation, financial strain, or heavy pressure.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>⚡ Potential Effects</h3>
-                    <ul>
-                        <li>Impact on physical health (fatigue, headaches, sleep issues).</li>
-                        <li>Difficulty in maintaining personal or professional relationships.</li>
-                        <li>Reduced productivity and focus at work or school.</li>
-                        <li>Overwhelming feelings of anxiety, sadness, or burnout.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Prevention Section -->
-    <section id="prevention" class="container">
-        <h2>Preventions & Healthy Habits</h2>
+    <section id="solutions" class="container">
+        <h2>Interactive Wellness Tools</h2>
+        <p class="section-subtitle">Practical tools to manage daily stress and track your personal well-being.</p>
+        
         <div class="grid-container">
-            <div class="card">
-                <h3>🧘 Mindfulness & Stress Management</h3>
-                <p>Practicing deep breathing, meditation, or yoga to keep your nervous system grounded.</p>
+            <div class="card interactive-card">
+                <h3>😊 Daily Mood & Journal</h3>
+                <p>Log how you feel and write a quick reflection note.</p>
+                <textarea id="journal-input" rows="2" placeholder="Write a short reflection..."></textarea>
+                <button id="log-mood-btn" class="btn-secondary">Log Mood & Note</button>
+                <p id="mood-output" class="output-text"></p>
+                <ul id="mood-history-list" style="padding-left: 1.2rem; font-size: 0.85rem; color: #4a5568; margin-top:10px;"></ul>
             </div>
-            <div class="card">
-                <h3>💤 Quality Sleep Hygiene</h3>
-                <p>Aiming for 7-9 hours of consistent sleep nightly to allow the brain to recover and repair.</p>
-            </div>
-            <div class="card">
-                <h3>🤝 Strong Social Support</h3>
-                <p>Maintaining open communication with friends, family, or trusted community groups.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- 5. Solutions & Interactive Tools Section -->
-    <section id="solutions" class="alt-background">
-        <div class="container">
-            <h2>Solutions & Interactive Tools</h2>
-            <div class="grid-container">
-                <div class="card interactive-card">
-                    <h3>😊 Daily Mood & Journal</h3>
-                    <p>Log how you feel and write a quick note about your day.</p>
-                    <textarea id="journal-input" rows="2" placeholder="Write a short reflection (optional)..." style="width:100%; margin-top:10px; padding:8px; border-radius:6px; border:1px solid #cbd5e0;"></textarea>
-                    <button id="log-mood-btn" class="btn-secondary">Log Mood & Save Note</button>
-                    <p id="mood-output" class="output-text"></p>
-                    <div id="mood-history-container" style="margin-top: 15px; text-align: left;">
-                        <h4 style="font-size: 0.9rem; color: #4a5568; margin-bottom: 5px;">Today's Log History:</h4>
-                        <ul id="mood-history-list" style="padding-left: 1.2rem; font-size: 0.85rem; color: #4a5568;"></ul>
+            <div class="card interactive-card" style="text-align: center;">
+                <h3>🌱 Digital Growth Garden</h3>
+                <p>Water your virtual plant daily to build healthy habits.</p>
+                <div class="plant-visual-box" style="margin: 15px 0; padding: 15px; background: #f0fdf4; border-radius: 12px; border: 1px dashed #34d399;">
+                    <span id="plant-emoji" style="font-size: 3rem;">🌱</span>
+                    <p id="streak-counter" style="font-weight: 600; font-size: 0.9rem; color: #065f46; margin-top: 5px;">Growth Streak: 0 Days</p>
+                </div>
+                <button id="water-plant-btn" class="btn-secondary">💧 Water Plant Today</button>
+            </div>
+
+            <div class="card interactive-card" style="text-align: center;">
+                <h3>🫁 Guided Breathing Pacer</h3>
+                <p>Regulate your nervous system with visual pacing.</p>
+                <div class="breathing-container" style="display: flex; justify-content: center; align-items: center; height: 110px; margin: 10px 0;">
+                    <div id="breathing-circle" style="width: 75px; height: 75px; background: #34d399; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.8rem; transition: all 4s ease-in-out;">
+                        Breathe
                     </div>
                 </div>
-
-                <div class="card interactive-card">
-                    <h3>📝 Quick Self-Check</h3>
-                    <p>Answer a quick question to gauge your current stress level.</p>
-                    <button id="quiz-btn" class="btn-secondary">Take Check-in</button>
-                    <p id="quiz-output" class="output-text"></p>
-                </div>
+                <button id="start-breathing-btn" class="btn-secondary">Start 4-4-4-4 Pacer</button>
             </div>
         </div>
     </section>
 
-    <!-- 6. Anonymous Community Support Wall with Group Categories & Backend -->
+    <section id="sos-section" class="container alt-background" style="text-align: center; border-radius: 12px; margin: 2rem auto; border: 1px solid #feb2b2; max-width: 1100px; background: #fff5f5;">
+        <h2 style="color: #9b2c2c; margin-bottom: 0.5rem;">🆘 SOS: 5-4-3-2-1 Grounding Tool</h2>
+        <p class="section-subtitle" style="margin-bottom: 1.5rem;">Feeling overwhelmed or panicked? Let's bring your focus back to the present moment.</p>
+        <div class="card" style="max-width: 600px; margin: 0 auto; background: white; border: 1px solid #cbd5e0;">
+            <p id="grounding-step-text" style="font-size: 1.05rem; font-weight: 500; min-height: 45px; margin-bottom: 1.5rem; color: #2d3748;">Click the button below to start the sensory grounding exercise.</p>
+            <button id="next-grounding-btn" class="btn-primary" style="background-color: #9b2c2c;">Next Step →</button>
+        </div>
+    </section>
+
     <section id="community-wall" class="container">
         <h2>Anonymous Peer Support Wall</h2>
-        <p class="section-subtitle">State your problems anonymously, get ideas, and share solutions organized by group categories.</p>
+        <p class="section-subtitle">Share thoughts anonymously, exchange ideas, and find support organized by life groups.</p>
         
-        <div class="community-wrapper">
-            <!-- Form to Post a Problem -->
+        <div class="community-wrapper" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
             <div class="card post-form-card">
                 <h3>Share Anonymously</h3>
                 <form id="problem-form">
-                    <div class="form-group">
-                        <label for="category-select">Select Category / Group:</label>
-                        <select id="category-select" required>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="category-select" style="font-size: 0.9rem; font-weight:600;">Select Group Category:</label>
+                        <select id="category-select" style="width:100%; padding:8px; border-radius:6px; border:1px solid #cbd5e0; margin-top:5px;" required>
                             <option value="Students (SHS and university)">Students (SHS and university)</option>
                             <option value="Working professionals">Working professionals</option>
                             <option value="Parents and caregivers">Parents and caregivers</option>
                             <option value="Healthcare workers">Healthcare workers</option>
                             <option value="Job seekers">Job seekers</option>
                             <option value="Older adults">Older adults</option>
-                            <option value="People in underserved or rural communities">People in underserved or rural communities</option>
-                            <option value="Anyone interested in maintaining good mental health">Anyone interested in maintaining good mental health</option>
+                            <option value="Underserved or rural communities">Underserved or rural communities</option>
+                            <option value="General mental health">General mental health</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="problem-input">What's on your mind?</label>
-                        <textarea id="problem-input" rows="4" placeholder="Type your problem anonymously here..." required></textarea>
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="problem-input" style="font-size: 0.9rem; font-weight:600;">What's on your mind?</label>
+                        <textarea id="problem-input" rows="4" placeholder="Type your problem anonymously here..." style="width:100%; padding:8px; border-radius:6px; border:1px solid #cbd5e0; margin-top:5px;" required></textarea>
                     </div>
-                    <button type="submit" class="btn-primary">Post to Backend Database</button>
+                    <button type="submit" class="btn-primary">Post to Live Backend</button>
                 </form>
             </div>
 
-            <!-- Wall displaying posts and responses from Backend -->
             <div class="wall-container">
-                <h3>Community Board (Live Backend)</h3>
+                <h3>Community Board</h3>
                 <div id="posts-container">
-                    <div class="community-post">
-                        <span class="badge">Students (SHS and university)</span>
+                    <div class="community-post" style="padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff;">
                         <p class="post-text">"Loading live community posts from database..."</p>
                     </div>
                 </div>
@@ -163,9 +119,55 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <section id="faq-section" class="container alt-background">
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <p class="section-subtitle">Diverse perspectives on mental health, cultural nuances, and inclusive well-being.</p>
+        
+        <div class="faq-container" style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How does mental health vary across different cultures and communities?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Cultural backgrounds shape how people express distress—sometimes manifesting as physical exhaustion or somatic pain. Inclusive support honors all community traditions and lived backgrounds.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>I'm a student balancing heavy academics. How can I manage burnout?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Break tasks into micro-steps, use focused time intervals like the Pomodoro technique, and remember that your intrinsic worth is entirely separate from your academic grades.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>How can people in remote, rural, or underserved areas access support?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Digital applications like MindCare Hub, text-based crisis circles, and localized community outreach networks bridge the distance barrier, providing anonymous guidance anywhere you have web access.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>What are unique challenges faced by working professionals & caregivers?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Professionals often battle chronic multitasking and career pressure, while caregivers frequently experience compassion fatigue. Establishing firm personal boundaries and micro-breaks is vital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <p>&copy; 2026 MindCare Hub. Built with care for better mental health.</p>
+        <p>&copy; 2026 MindCare Hub. Built with care for inclusive mental health.</p>
     </footer>
 
     <script src="script.js"></script>

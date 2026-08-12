@@ -1,5 +1,4 @@
-// Your Firebase Backend Configuration 
-// (Replace these details with your real credentials from your Firebase Console)
+/* script.js */
 const firebaseConfig = {
     apiKey: "YOUR_FIREBASE_API_KEY",
     authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
@@ -9,22 +8,15 @@ const firebaseConfig = {
     appId: "YOUR_FIREBASE_APP_ID"
 };
 
-// Initialize Firebase Backend
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// Dark Mode Toggle Logic
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 darkModeToggle.addEventListener('click', function() {
     document.body.classList.toggle('dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
-        darkModeToggle.textContent = "☀️ Light Mode";
-    } else {
-        darkModeToggle.textContent = "🌙 Dark Mode";
-    }
+    darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? "☀️ Light Mode" : "🌙 Dark Mode";
 });
 
-// Mood Tracker & Journal Log Feature
 document.getElementById('log-mood-btn').addEventListener('click', function() {
     const moods = [
         "😊 Feeling optimistic and balanced today!", 
@@ -40,31 +32,110 @@ document.getElementById('log-mood-btn').addEventListener('click', function() {
     
     const listItem = document.createElement('li');
     listItem.textContent = journalText ? `${randomMood} - "${journalText}"` : `${randomMood}`;
-    
     historyList.appendChild(listItem);
     document.getElementById('journal-input').value = '';
 });
 
-// Mini Self-Check Feature
-document.getElementById('quiz-btn').addEventListener('click', function() {
-    const tips = [
-        "💡 Tip: Take 3 slow, deep breaths. Inhale for 4 seconds, hold for 4, exhale for 4.",
-        "💡 Tip: Step away from screens for 10 minutes and stretch your body.",
-        "💡 Tip: Drink a glass of water and write down one thing you're grateful for right now.",
-        "💡 Tip: Remember that it's okay to ask for help when things feel heavy."
-    ];
-    const randomTip = tips[Math.floor(Math.random() * tips.length)];
-    document.getElementById('quiz-output').textContent = randomTip;
+let userStreak = parseInt(localStorage.getItem('mind_growth_streak')) || 0;
+const streakDisplay = document.getElementById('streak-counter');
+const plantEmoji = document.getElementById('plant-emoji');
+streakDisplay.textContent = `Growth Streak: ${userStreak} Days`;
+
+if (userStreak >= 3) plantEmoji.textContent = "🌿";
+if (userStreak >= 7) plantEmoji.textContent = "🌳";
+
+document.getElementById('water-plant-btn').addEventListener('click', function() {
+    userStreak++;
+    localStorage.setItem('mind_growth_streak', userStreak);
+    streakDisplay.textContent = `Growth Streak: ${userStreak} Days`;
+    
+    if (userStreak >= 3 && userStreak < 7) {
+        plantEmoji.textContent = "🌿";
+    } else if (userStreak >= 7) {
+        plantEmoji.textContent = "🌳";
+    } else {
+        plantEmoji.textContent = "🌱";
+    }
+    alert("💧 Plant watered successfully! Your growth streak is growing.");
 });
 
-// Handle Submitting Problems to Backend Database
+const breathingCircle = document.getElementById('breathing-circle');
+const startBreathingBtn = document.getElementById('start-breathing-btn');
+let breathingInterval = null;
+
+startBreathingBtn.addEventListener('click', function() {
+    if (breathingInterval) {
+        clearInterval(breathingInterval);
+        breathingInterval = null;
+        startBreathingBtn.textContent = "Start 4-4-4-4 Pacer";
+        breathingCircle.style.transform = "scale(1)";
+        breathingCircle.textContent = "Breathe";
+        return;
+    }
+
+    startBreathingBtn.textContent = "Stop Breathing Pacer";
+    let phase = 0;
+    const phasesText = ["Inhale (4s)", "Hold (4s)", "Exhale (4s)", "Hold (4s)"];
+    
+    function runBreathingCycle() {
+        breathingCircle.textContent = phasesText[phase];
+        if (phase === 0) {
+            breathingCircle.style.transform = "scale(1.4)";
+            breathingCircle.style.background = "#059669";
+        } else if (phase === 2) {
+            breathingCircle.style.transform = "scale(1)";
+            breathingCircle.style.background = "#34d399";
+        }
+        phase = (phase + 1) % 4;
+    }
+
+    runBreathingCycle();
+    breathingInterval = setInterval(runBreathingCycle, 4000);
+});
+
+const groundingSteps = [
+    "Look around you and name 3 things you can see right now.",
+    "Notice 2 things you can physically feel (like your feet on the floor).",
+    "Listen closely and name 1 thing you can hear in your room.",
+    "Take one slow, deep breath in... and release it completely. You are safe."
+];
+let currentGroundingIndex = 0;
+const groundingText = document.getElementById('grounding-step-text');
+
+document.getElementById('next-grounding-btn').addEventListener('click', function() {
+    currentGroundingIndex = (currentGroundingIndex + 1) % groundingSteps.length;
+    groundingText.textContent = groundingSteps[currentGroundingIndex];
+});
+
+const faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(item => {
+    const questionBtn = item.querySelector('.faq-question');
+    const answerDiv = item.querySelector('.faq-answer');
+    const icon = item.querySelector('.faq-icon');
+
+    questionBtn.addEventListener('click', () => {
+        const isOpen = answerDiv.style.maxHeight && answerDiv.style.maxHeight !== '0px';
+        
+        faqItems.forEach(otherItem => {
+            otherItem.querySelector('.faq-answer').style.maxHeight = '0px';
+            otherItem.querySelector('.faq-icon').textContent = '+';
+        });
+
+        if (!isOpen) {
+            answerDiv.style.maxHeight = answerDiv.scrollHeight + 'px';
+            icon.textContent = '−';
+        } else {
+            answerDiv.style.maxHeight = '0px';
+            icon.textContent = '+';
+        }
+    });
+});
+
 document.getElementById('problem-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const category = document.getElementById('category-select').value;
-    const problemText = document.getElementById('problem-input').value;
-    
-    if(!problemText.trim()) return;
+    const problemText = document.getElementById('problem-input').value.trim();
+    if(!problemText) return;
 
     try {
         await db.collection('community_posts').add({
@@ -74,15 +145,12 @@ document.getElementById('problem-form').addEventListener('submit', async functio
             responses: [],
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-
         document.getElementById('problem-input').value = '';
     } catch (error) {
-        console.error("Error saving post to backend: ", error);
-        alert("Error posting. Please check your Firebase settings in script.js.");
+        console.error("Error saving post: ", error);
     }
 });
 
-// Real-time backend listener to sync and display posts dynamically from database
 db.collection('community_posts').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
     const container = document.getElementById('posts-container');
     container.innerHTML = '';
@@ -95,43 +163,38 @@ db.collection('community_posts').orderBy('createdAt', 'desc').onSnapshot((snapsh
     snapshot.forEach((doc) => {
         const postData = doc.data();
         const postId = doc.id;
-
         const postDiv = document.createElement('div');
         postDiv.className = 'community-post';
         
         let responsesHtml = '';
         if (postData.responses && postData.responses.length > 0) {
             postData.responses.forEach(res => {
-                responsesHtml += `<div class="response-item">💡 <strong>Idea:</strong> ${escapeHtml(res)}</div>`;
+                responsesHtml += `<div style="font-size:0.85rem; margin-top:5px; color:#4a5568;">💡 ${escapeHtml(res)}</div>`;
             });
         } else {
-            responsesHtml = `<div class="response-item">🌱 <em>Be the first to share an idea or words of encouragement!</em></div>`;
+            responsesHtml = `<div style="font-size:0.85rem; margin-top:5px; color:#a0aec0;"><em>No ideas shared yet. Be the first!</em></div>`;
         }
 
         postDiv.innerHTML = `
             <span class="badge">${escapeHtml(postData.category)}</span>
-            <p class="post-text">"${escapeHtml(postData.problem)}"</p>
-            <div class="post-actions" style="margin-bottom: 10px;">
-                <button class="btn-hug" onclick="sendHug('${postId}', ${postData.hugs || 0})">❤️ Send Virtual Hug (<span class="hug-count">${postData.hugs || 0}</span>)</button>
+            <p style="font-weight: 500; margin: 8px 0;">"${escapeHtml(postData.problem)}"</p>
+            <div style="margin: 10px 0;">
+                <button onclick="sendHug('${postId}', ${postData.hugs || 0})" style="background:none; border:1px solid #cbd5e0; border-radius:4px; padding:4px 8px; cursor:pointer; font-size:0.8rem;">❤️ Virtual Hug (${postData.hugs || 0})</button>
             </div>
-            <div class="responses-section">${responsesHtml}</div>
-            <div class="reply-box">
-                <input type="text" placeholder="Share your idea..." class="reply-input" id="input-${postId}">
-                <button class="btn-secondary reply-btn" onclick="sendReply('${postId}')">Send Idea</button>
+            <div style="border-top:1px solid #edf2f7; padding-top:8px; margin-top:8px;">${responsesHtml}</div>
+            <div style="display:flex; gap:5px; margin-top:8px;">
+                <input type="text" placeholder="Share an idea..." id="input-${postId}" style="flex:1; padding:5px; font-size:0.8rem; border:1px solid #cbd5e0; border-radius:4px;">
+                <button onclick="sendReply('${postId}')" style="background:#34d399; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; font-size:0.8rem;">Send</button>
             </div>
         `;
         container.appendChild(postDiv);
     });
-}, (error) => {
-    console.error("Error listening to database changes: ", error);
 });
 
-// Function to handle saving suggestions/ideas into the backend database
 window.sendReply = async function(postId) {
     const inputField = document.getElementById(`input-${postId}`);
     const replyText = inputField.value.trim();
     if (!replyText) return;
-
     try {
         const postRef = db.collection('community_posts').doc(postId);
         const doc = await postRef.get();
@@ -141,22 +204,15 @@ window.sendReply = async function(postId) {
             await postRef.update({ responses: currentResponses });
             inputField.value = '';
         }
-    } catch (error) {
-        console.error("Error saving reply to backend: ", error);
-    }
+    } catch (error) { console.error("Error saving reply: ", error); }
 };
 
-// Function to handle updating virtual hugs in the backend database
 window.sendHug = async function(postId, currentHugs) {
     try {
-        const postRef = db.collection('community_posts').doc(postId);
-        await postRef.update({ hugs: currentHugs + 1 });
-    } catch (error) {
-        console.error("Error updating hugs in backend: ", error);
-    }
+        await db.collection('community_posts').doc(postId).update({ hugs: currentHugs + 1 });
+    } catch (error) { console.error("Error updating hugs: ", error); }
 };
 
-// Security helper to prevent HTML injection
 function escapeHtml(text) {
     if (!text) return '';
     return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
